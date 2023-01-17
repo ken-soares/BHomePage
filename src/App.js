@@ -7,12 +7,14 @@ const App = () => {
     document.body.style.background =
       "url(" + localStorage["bg"] + ") no-repeat center center fixed";
     document.body.style.backgroundSize = "cover";
+    const motd_el = document.getElementById("motd");
+    motd_el.textContent = localStorage["motd"];
   }, []);
   return (
     <div className="App">
       <>
         <DropdownMenu />
-        <h1>Hello world</h1>
+        <h1 id="motd">Hi, Kenneth!</h1>
       </>
     </div>
   );

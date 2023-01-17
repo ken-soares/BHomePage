@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faSave } from "@fortawesome/free-solid-svg-icons";
+import DropDownItem from "./DropDownItem";
 
 const DropDownMenu = () => {
   const [bgLink, setBgLink] = useState("");
-
+  const [motd, setMotd] = useState("");
   let menuRef = useRef();
 
   useEffect(() => {
@@ -30,8 +31,9 @@ const DropDownMenu = () => {
         </div>
         <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
           <h3>Settings</h3>
+          <h4>Wallpaper</h4>
           <DropDownItem
-            inTxt={"bg link"}
+            inTxt={"wallpaper.jpg"}
             btnTxt={<FontAwesomeIcon icon={faSave} />}
             inFct={setBgLink}
             btnFct={() => {
@@ -41,29 +43,20 @@ const DropDownMenu = () => {
               localStorage["bg"] = bgLink;
             }}
           />
+          <h4>MOTD</h4>
+          <DropDownItem
+            inTxt={"Hi, Kenneth!"}
+            btnTxt={<FontAwesomeIcon icon={faSave} />}
+            inFct={setMotd}
+            btnFct={() => {
+              const motd_el = document.getElementById("motd");
+              motd_el.textContent = motd;
+              localStorage["motd"] = motd;
+            }}
+          />
         </div>
       </div>
     </div>
-  );
-};
-
-const DropDownItem = ({ inTxt, btnTxt, inFct, btnFct }) => {
-  return (
-    <li className="dropdownItem">
-      <input
-        placeholder={inTxt}
-        onChange={(event) => {
-          inFct(event.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          btnFct();
-        }}
-      >
-        {btnTxt}
-      </button>
-    </li>
   );
 };
 
